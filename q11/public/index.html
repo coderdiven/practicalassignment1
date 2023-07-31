@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Cricket Score</title>
+</head>
+<body>
+    <div class="content">
+        <h4>Scoreboard</h4>
+        <div id="score">
+
+        </div>
+    </div>
+</body>
+<script>
+    const ele=document.getElementById("score")
+    const fetchScore=async()=>{
+        try{
+            const data=await fetch("http://localhost:8000/getscore");
+            const pdata=await data.json()
+            const display=pdata.score;
+            ele.innerHTML= JSON.stringify(display)
+            console.log("data",pdata)
+            console.log("pdata",pdata)
+        }catch(err)
+        {
+            console.log("Error Occured");
+            ele.innerHTML="Error While Fetching Score"
+        }
+    }
+    fetchScore();
+    setInterval(fetchScore,5000)
+</script>
+</html>
